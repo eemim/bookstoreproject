@@ -35,10 +35,8 @@ public class BookstoreApplication {
 				System.out.println(category.toString());
 			}
 			
-			Book book1 = new Book("A.A. Milne", "Nalle Puh rakentaa talon", 1928, "1232323-22", 19.95);
-			Book book2 = new Book ("J.R.R. Tolkien", "The Lord of the Rings", 1954, "3232321-21", 29.95);
-			bookRepository.save(book1);
-			bookRepository.save(book2);
+			bookRepository.save(new Book("A.A. Milne", "Nalle Puh rakentaa talon", 1928, "1232323-22", 19.95, category2));
+			bookRepository.save(new Book ("J.R.R. Tolkien", "The Lord of the Rings", 1954, "3232321-21", 29.95, category1));
 			
 			List<Book> books = (List<Book>) bookRepository.findAll();
 			for (Book book : books) {

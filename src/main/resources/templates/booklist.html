@@ -12,6 +12,7 @@
 		<tr>
 			<th>Author</th>
 			<th>Title</th>
+			<th>Category</th>
 			<th>Year</th>
 			<th>ISBN</th>
 			<th>Price</th>
@@ -19,6 +20,7 @@
 		<tr th:each="book : ${books}">
 			<td th:text="${book.author}">
 			<td th:text="${book.title}">
+			<td th:text="${book.category.name}">
 			<td th:text="${book.year}">
 			<td th:text="${book.isbn}">
 			<td th:text="${book.price}">
