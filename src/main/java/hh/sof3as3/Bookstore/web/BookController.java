@@ -1,17 +1,23 @@
 package hh.sof3as3.Bookstore.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.sof3as3.Bookstore.domain.Book;
 import hh.sof3as3.Bookstore.domain.BookRepository;
 import hh.sof3as3.Bookstore.domain.CategoryRepository;
 
+@CrossOrigin
 @Controller
 public class BookController {
 
@@ -26,6 +32,18 @@ public class BookController {
 		model.addAttribute("books", bookRepository.findAll());
 
 		return "booklist";
+	}
+
+	// REST allBooks
+	@GetMapping(value = "/books")
+	public @ResponseBody List<Book> getBooks() {
+		return (List<Book>) bookRepository.findAll();
+	}
+
+	// REST bookById
+	@GetMapping("/books/{id}")
+	public @ResponseBody Optional<Book> getOneBook(@PathVariable("id") Long bookid) {
+		return bookRepository.findById(bookid);
 	}
 
 	@GetMapping("/addbook")

@@ -2,6 +2,8 @@ package hh.sof3as3.Bookstore;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +16,7 @@ import hh.sof3as3.Bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -32,7 +35,7 @@ public class BookstoreApplication {
 			
 			List<Category> categories = (List<Category>) categoryRepository.findAll();
 			for (Category category : categories) {
-				System.out.println(category.toString());
+				log.info(category.toString());
 			}
 			
 			bookRepository.save(new Book("A.A. Milne", "Nalle Puh rakentaa talon", 1928, "1232323-22", 19.95, category2));
@@ -40,7 +43,7 @@ public class BookstoreApplication {
 			
 			List<Book> books = (List<Book>) bookRepository.findAll();
 			for (Book book : books) {
-				System.out.println(book.toString());
+				log.info(book.toString());
 			}
 		};
 	}
