@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <title>Server Programming with Spring Boot</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,7 +8,16 @@
 	th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>WELCOME TO BOOKSTORE</h1>
+	<div style="padding: 10px">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Log out"
+				class="btn float-right btn-outline-danger" />
+		</form>
+	</div>
+	<h1>
+		WELCOME TO BOOKSTORE <span sec:authentication="name"></span>
+	</h1>
+
 	<table class="table table-striped">
 		<tr>
 			<th>Author</th>
@@ -24,10 +34,12 @@
 			<td th:text="${book.year}">
 			<td th:text="${book.isbn}">
 			<td th:text="${book.price}">
-			<td><a th:href="@{delete/{id}(id=${book.id})}"
-				class="btn btn-danger"> Delete </a></td>
 			<td><a th:href="@{edit/{id}(id=${book.id})}"
 				class="btn btn-warning"> Edit </a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a
+				th:href="@{delete/{id}(id=${book.id})}" class="btn btn-danger">
+					Delete </a></td>
+
 		</tr>
 	</table>
 	<p>
