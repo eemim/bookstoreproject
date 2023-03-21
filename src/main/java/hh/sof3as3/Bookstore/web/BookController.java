@@ -62,7 +62,7 @@ public class BookController {
 	}
 
 	@GetMapping("/delete/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long id) {
 		bookRepository.deleteById(id);
 		return "redirect:/booklist";
@@ -71,6 +71,7 @@ public class BookController {
 	@GetMapping("/edit/{id}")
 	public String bookEditing(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("book", bookRepository.findById(id));
+		model.addAttribute("categories", categoryRepository.findAll());
 		return "editbook";
 	}
 

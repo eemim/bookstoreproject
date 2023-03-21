@@ -15,6 +15,15 @@
 		<p>
 			Title: <input type="text" th:field="*{title}" />
 		</p>
+		
+		<label for="catlist">Category: </label> 
+		<select id="catlist"
+			th:field="*{category}" class="form-control">
+			<option th:each="category: ${categories}"
+				th:value="${category.categoryid}" th:text="${category.name}"></option>
+		</select>
+		
+			
 		<p>
 			Year: <input type="text" th:field="*{year}" />
 		</p>
